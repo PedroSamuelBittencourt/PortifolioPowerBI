@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>Pedro Bittencourt - Power BI Portfolio</title>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            charcoal: "#121212",
+            graphite: "#1E1E1E",
+            mediumgray: "#2E2E2E",
+            petrolblue: "#0D6E6E",
+            neongreen: "#00C896",
+            coralred: "#E63946",
+            icewhite: "#EAEAEA",
+          },
+          fontFamily: { sans: ["Inter", "ui-sans-serif", "system-ui"] },
+          boxShadow: {
+            "neongreen-glow": "0 4px 15px 0 rgba(0, 200, 150, 0.6), 0 0 10px 3px rgba(0, 200, 150, 0.5)",
+            "petrolblue-glow": "0 4px 15px 0 rgba(13, 110, 110, 0.6), 0 0 10px 3px rgba(13, 110, 110, 0.5)",
+            "coralred-glow": "0 4px 15px 0 rgba(230, 57, 70, 0.6), 0 0 10px 3px rgba(230, 57, 70, 0.5)",
+          },
+          transitionProperty: { transformshadow: "transform, box-shadow" },
+        },
+      },
+    };
+  </script>
+
+  <!-- Icons & Font -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet"/>
+
+  <style>
+    .hover-neongreen-shadow:hover {
+      box-shadow: 0 8px 20px 0 rgba(0, 200, 150, 0.7), 0 0 15px 5px rgba(0, 200, 150, 0.6) !important;
+    }
+    .hover-petrolblue-shadow:hover {
+      box-shadow: 0 8px 20px 0 rgba(13, 110, 110, 0.7), 0 0 15px 5px rgba(13, 110, 110, 0.6) !important;
+    }
+    .hover-coralred-shadow:hover {
+      box-shadow: 0 8px 20px 0 rgba(230, 57, 70, 0.7), 0 0 15px 5px rgba(230, 57, 70, 0.6) !important;
+    }
+    .card-hover { transition: transform 300ms cubic-bezier(0.4,0,0.2,1), box-shadow 300ms cubic-bezier(0.4,0,0.2,1); }
+    .card-hover:hover { transform: translateY(-8px) scale(1.03); }
+  </style>
+</head>
+
+<body class="bg-charcoal text-icewhite font-sans">
+  <!-- HEADER -->
+  <header class="bg-graphite shadow-md sticky top-0 z-50">
+    <nav class="container mx-auto flex items-center justify-between p-4 relative">
+      <a class="text-2xl font-bold text-icewhite" href="index.html">Pedro Bittencourt</a>
+      <button aria-label="Toggle menu" class="block md:hidden text-icewhite focus:outline-none focus:ring-2 focus:ring-petrolblue" id="menu-btn">
+        <i class="fas fa-bars text-2xl"></i>
+      </button>
+      <ul class="hidden md:flex space-x-6 text-lg md:static absolute top-full left-0 w-full md:w-auto bg-graphite md:bg-transparent border-t md:border-0 border-mediumgray md:shadow-none shadow-md md:rounded-none rounded-b-lg" id="menu">
+        <li><a class="block px-4 py-3 md:p-0 hover:text-petrolblue transition" href="index.html#career-projects">Projetos da Carreira</a></li>
+        <li><a class="block px-4 py-3 md:p-0 hover:text-petrolblue transition" href="index.html#personal-projects">Projetos Pessoais</a></li>
+        <li><a class="block px-4 py-3 md:p-0 hover:text-petrolblue transition" href="index.html#contact">Contato</a></li>
+        <li><a class="block px-4 py-3 md:p-0 hover:text-petrolblue transition" href="index.html#about">Quem Sou Eu</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- MAIN -->
+  <main class="container mx-auto p-6 md:p-12 max-w-6xl">
+    <h1 class="text-3xl md:text-4xl font-extrabold mb-6 text-icewhite text-center" id="dashboard-title">
+      Acompanhamento de Meta Comercial
+    </h1>
+
+
+<!-- CARROSSEL CRIATIVO E RESPONSIVO -->
+<section class="mb-10">
+  <div class="grid grid-cols-[auto,1fr,auto] items-center gap-3 sm:gap-6">
+    <!-- seta PREV fora -->
+    <button
+      id="prev-btn"
+      class="hidden sm:inline-flex justify-self-end bg-graphite/80 hover:bg-graphite/95 px-3 py-2 rounded-full focus:outline-none focus:ring-2 focus:ring-petrolblue"
+      aria-label="Slide anterior" type="button">
+      <i class="fas fa-chevron-left"></i>
+    </button>
+
+    <!-- viewport + moldura -->
+    <div class="w-full">
+      <div id="carousel-viewport"
+           class="relative overflow-hidden rounded-2xl border border-mediumgray shadow-lg
+                  bg-gradient-to-br from-graphite to-charcoal">
+        <!-- barra de progresso -->
+        <div class="absolute top-0 left-0 w-full h-1 bg-mediumgray/60">
+          <div id="progress-bar" class="h-1 w-0 bg-neongreen transition-[width] duration-100"></div>
+        </div>
+
+        <!-- trilho -->
+        <div id="carousel-track" class="flex transition-transform duration-500 ease-out">
+          <!-- slide 1 -->
+          <figure class="min-w-full flex items-center justify-center h-[56vh] sm:h-[64vh] lg:h-[80vh] p-3 sm:p-6">
+            <img
+              src="img/pagDash/tecidos.jpg"
+              alt="Controle de Garantias — visão 1"
+              class="block w-full h-full object-contain rounded-xl bg-graphite"
+              loading="eager" decoding="async" />
+            <figcaption class="sr-only">Visão geral de garantias</figcaption>
+          </figure>
+
+          <!-- slide 2 -->
+          <figure class="min-w-full flex items-center justify-center h-[56vh] sm:h-[64vh] lg:h-[80vh] p-3 sm:p-6">
+            <img
+              src="img/pagDash/tecidoweb.jpg"
+              alt="Controle de Garantias — visão 2"
+              class="block w-full h-full object-contain rounded-xl bg-graphite"
+              loading="lazy" decoding="async" />
+            <figcaption class="sr-only">Detalhes de garantias</figcaption>
+          </figure>
+
+          <!-- slide 3 -->
+          <figure class="min-w-full flex items-center justify-center h-[56vh] sm:h-[64vh] lg:h-[80vh] p-3 sm:p-6">
+            <img
+              src="img/pagDash/tecido3.png"
+              alt="Controle de Garantias — visão 3"
+              class="block w-full h-full object-contain rounded-xl bg-graphite"
+              loading="lazy" decoding="async" />
+            <figcaption class="sr-only">Detalhes adicionais de garantias</figcaption>
+          </figure>
+        </div>
+
+        <!-- barra inferior: legenda + contador + play/pause (DENTRO do viewport!) -->
+        <div class="absolute bottom-0 left-0 w-full bg-graphite/70 backdrop-blur text-icewhite text-sm sm:text-base">
+          <div class="flex items-center justify-between px-3 sm:px-4 py-2">
+            <p id="caption" class="truncate">—</p>
+            <div class="flex items-center gap-3">
+              <button id="toggle-autoplay"
+                      class="px-2 py-1 rounded-md bg-mediumgray/70 hover:bg-mediumgray focus:outline-none focus:ring-2 focus:ring-petrolblue"
+                      type="button" aria-label="Pausar autoplay">
+                <i class="fas fa-pause"></i>
+              </button>
+              <span id="counter" class="tabular-nums text-icewhite/80">—</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- THUMBNAILS (o JS preenche) -->
+      <div id="thumbs" class="mt-4 flex gap-3 overflow-x-auto scroll-p-2 snap-x" aria-label="Miniaturas"></div>
+    </div>
+
+    <!-- seta NEXT fora -->
+    <button
+      id="next-btn"
+      class="hidden sm:inline-flex justify-self-start bg-graphite/80 hover:bg-graphite/95 px-3 py-2 rounded-full focus:outline-none focus:ring-2 focus:ring-petrolblue"
+      aria-label="Próximo slide" type="button">
+      <i class="fas fa-chevron-right"></i>
+    </button>
+  </div>
+</section>
+
+  <!-- CONTEXTO -->
+<div class="contexto-dash my-10 max-w-4xl mx-auto">
+  <h2 class="text-2xl font-bold text-neongreen mb-4 flex items-center gap-2">
+    <i class="fas fa-info-circle text-neongreen"></i> Contexto
+  </h2>
+  <p class="text-icewhite/90 text-lg leading-relaxed mb-4">
+    No 3°sem cursando Gestão de TI na Fatec Guarantinguetá, tive a oportunidade de juntamente com meu grupo criar um sistema web para controle de estoque de uma fábrica de tecidos localizada em Aparecida do Norte, SP. Fiquei responsável por fazer essa Dash integrada com o sistema, que mostrava para o CEO, KPI's sobre os rolos de tecidos produzidos cotidianamente. 
+  </p>
+</div>
+
+<!-- KPI'S -->
+<div class="descricao-dash my-10 max-w-5xl mx-auto">
+  <h2 class="text-2xl font-bold text-petrolblue mb-4 flex items-center gap-2">
+    <i class="fas fa-chart-bar text-petrolblue"></i> KPI's oferecidos
+  </h2>
+  
+  <!-- Grupo 1 -->
+  <div class="mb-6">
+    <h3 class="text-xl font-semibold text-neongreen mb-2">Indicadores de Meta e Realização</h3>
+    <p class="text-icewhite/80 text-base leading-relaxed">
+     Mostra o valor da meta definida, o faturamento realizado e a diferença entre ambos
+    </p>
+    <p class="text-icewhite/80 text-base leading-relaxed">
+     Permite identificar rapidamente o percentual de cumprimento da meta através de um velocímetro visual (gauge).
+    </p>
+  </div>
+
+  <!-- Grupo 2 -->
+  <div class="mb-6">
+    <h3 class="text-xl font-semibold text-neongreen mb-2">Produção por Máquinas</h3>
+    </p>
+    <p class="text-icewhite/80 text-base leading-relaxed">
+      Gráfico de rosca que distribui a produção entre diferentes máquinas (MAQ1, MAQ2, MAQ3, etc.), permitindo análise de capacidade e eficiência por equipamento.
+    </p>
+  </div>
+
+  <!-- Grupo 3 -->
+  <div class="mb-6">
+    <h3 class="text-xl font-semibold text-neongreen mb-2">Entregas Recebidas</h3>
+    <p class="text-icewhite/80 text-base leading-relaxed">
+      Indicador de gauge mostrando o total de entregas recebidas. Outro gauge complementa com a taxa de entregas dentro do prazo, facilitando a avaliação do desempenho logístico.
+    </p>
+  </div>
+
+   <!-- Grupo 3 -->
+  <div class="mb-6">
+    <h3 class="text-xl font-semibold text-neongreen mb-2">Total de Rolos</h3>
+    <p class="text-icewhite/80 text-base leading-relaxed">
+      Card de indicador simples apresentando o volume total em estoque/controle.
+    </p>
+  </div>
+   <div class="mb-6">
+    <h3 class="text-xl font-semibold text-neongreen mb-2">Cor dos Rolos</h3>
+    <p class="text-icewhite/80 text-base leading-relaxed">
+      Gráfico de barras horizontais com a quantidade de rolos por cor, permitindo análise de variedade e predominância na produção.
+    </p>
+  </div>
+   <div class="mb-6">
+    <h3 class="text-xl font-semibold text-neongreen mb-2">Status do Rolo</h3>
+    <p class="text-icewhite/80 text-base leading-relaxed">
+      Gráfico de barras horizontais com a quantidade de rolos por cor, permitindo análise de variedade e predominância na produção. Apoia a gestão de fluxo produtivo e disponibilidade de material.
+    </p>
+  </div>
+  <div class="mb-6">
+    <h3 class="text-xl font-semibold text-neongreen mb-2">Tipo de Tecido</h3>
+    <p class="text-icewhite/80 text-base leading-relaxed">
+      Gráfico de barras horizontais com a quantidade de rolos por cor, permitindo análise de variedade e predominância na produção. Apoia a gestão de fluxo produtivo e disponibilidade de material.
+    </p>
+  </div>
+   <div class="mb-6">
+    <h3 class="text-xl font-semibold text-neongreen mb-2">Menu Lateral</h3>
+    <p class="text-icewhite/80 text-base leading-relaxed">
+      Navegação rápida entre módulos: Estoque, Financeiro, Planilha e Colaborador. Filtro de data para refinar análises por período.
+    </p>
+  </div>
+  <div class="mb-6">
+    <h3 class="text-xl font-semibold text-neongreen mb-2">Fortemente elogiado por:</h3>
+    <div class="mb-6">
+    <ul class="list-disc list-inside space-y-1 text-icewhite/80 text-base">
+      <li>Clareza Visual: uso de indicadores visuais (gauge, barras comparativas, cards) que facilitam a leitura imediata dos resultados.</li>
+      <li>Gestão integrada: contempla produção, estoque e logística em uma única tela.</li>
+      <li>Foco em indicadores-chave: destaca métricas essenciais como entregas no prazo, volume de rolos e status do material.</li>
+      <li>Usabilidade: navegação lateral organizada por áreas da empresa e filtro temporal para análises dinâmicas.</li>
+    </ul>
+  </div>
+  </div>
+</div> 
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-graphite border-t border-mediumgray py-6 mt-12">
+    <div class="container mx-auto px-6 md:px-12 text-center text-icewhite space-y-4">
+      <p class="max-w-xl mx-auto text-lg">
+        Fique à vontade para entrar em contato comigo para projetos, dúvidas ou
+        parcerias.
+      </p>
+      <div class="flex justify-center space-x-8 text-2xl">
+        <a aria-label="LinkedIn" class="hover:text-petrolblue transition" href="https://www.linkedin.com/in/pedrobittencourt" rel="noopener noreferrer" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a aria-label="GitHub" class="hover:text-icewhite transition" href="https://github.com/pedrobittencourt" rel="noopener noreferrer" target="_blank"><i class="fab fa-github"></i></a>
+        <a aria-label="WhatsApp" class="hover:text-neongreen transition" href="https://wa.me/5511999999999" rel="noopener noreferrer" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        <a aria-label="Email" class="hover:text-coralred transition" href="mailto:pedro.bittencourt@example.com"><i class="fas fa-envelope"></i></a>
+      </div>
+      <p class="text-sm text-icewhite/70">© 2025 Pedro Bittencourt. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+   <script>
+  document.addEventListener("DOMContentLoaded", function () {
+  // MENU MOBILE (mantido)
+  const btn = document.getElementById("menu-btn");
+  const menu = document.getElementById("menu");
+  if (btn && menu) {
+    btn.addEventListener("click", () => {
+      menu.classList.toggle("hidden");
+      const icon = btn.querySelector("i");
+      if (!icon) return;
+      icon.classList.toggle("fa-bars");
+      icon.classList.toggle("fa-times");
+    });
+  }
+
+  // ---------------- CARROSSEL DINÂMICO ----------------
+  const track    = document.getElementById("carousel-track");
+  const viewport = document.getElementById("carousel-viewport");
+  const prev     = document.getElementById("prev-btn");
+  const next     = document.getElementById("next-btn");
+  const thumbs   = document.getElementById("thumbs");
+  const caption  = document.getElementById("caption");
+  const counter  = document.getElementById("counter");
+  const progress = document.getElementById("progress-bar");
+  const toggle   = document.getElementById("toggle-autoplay");
+
+  if (!track || !viewport || !caption || !counter || !progress || !toggle) return;
+
+  const slides = Array.from(track.querySelectorAll("figure"));
+  const total = slides.length;
+
+  // Lê captions do ALT (fallback para "Slide N")
+  const captions = slides.map((fig, i) => {
+    const img = fig.querySelector("img");
+    return (img && img.alt && img.alt.trim()) ? img.alt.trim() : `Slide ${i + 1}`;
+  });
+
+  // Cria thumbnails automaticamente
+  thumbs.innerHTML = "";
+  slides.forEach((fig, i) => {
+    const img = fig.querySelector("img");
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "snap-start shrink-0 rounded-xl border-2 border-transparent hover:border-icewhite/40";
+    btn.dataset.go = String(i);
+
+    const th = document.createElement("img");
+    th.src = img?.getAttribute("src") || "";
+    th.alt = `Thumb ${i + 1}`;
+    th.className = "h-16 sm:h-20 object-contain bg-graphite rounded-[10px] p-1";
+
+    btn.appendChild(th);
+    thumbs.appendChild(btn);
+  });
+
+  let index = 0;
+  let autoplay = true;
+  let timerId = null;
+  const AUTOPLAY_MS = 6000;
+
+  function updateUI() {
+    track.style.transform = `translateX(-${index * 100}%)`;
+    caption.textContent = captions[index] || `Slide ${index + 1}`;
+    counter.textContent = `${index + 1} / ${total}`;
+
+    // thumbs: borda ativa
+    Array.from(thumbs.querySelectorAll("button")).forEach((b, i) => {
+      b.classList.toggle("border-neongreen/80", i === index);
+      b.classList.toggle("border-transparent", i !== index);
+    });
+
+    // progress bar
+    progress.style.transition = "none";
+    progress.style.width = "0%";
+    void progress.offsetWidth; // reflow
+    progress.style.transition = `width ${AUTOPLAY_MS}ms linear`;
+    if (autoplay) progress.style.width = "100%";
+  }
+
+  function goTo(i) {
+    index = (i + total) % total;
+    updateUI();
+  }
+  function nextSlide() { goTo(index + 1); }
+  function prevSlide() { goTo(index - 1); }
+
+  // Controles
+  prev?.addEventListener("click", () => { pauseOnce(); prevSlide(); });
+  next?.addEventListener("click", () => { pauseOnce(); nextSlide(); });
+
+  thumbs.addEventListener("click", (e) => {
+    const b = e.target.closest("button[data-go]");
+    if (!b) return;
+    pauseOnce();
+    goTo(parseInt(b.dataset.go, 10));
+  });
+
+  // teclado
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowRight") { pauseOnce(); nextSlide(); }
+    if (e.key === "ArrowLeft")  { pauseOnce(); prevSlide(); }
+  });
+
+  // swipe
+  let startX = 0, dx = 0;
+  viewport.addEventListener("touchstart", (e) => { startX = e.touches[0].clientX; dx = 0; pauseOnce(); }, { passive: true });
+  viewport.addEventListener("touchmove",  (e) => { dx = e.touches[0].clientX - startX; }, { passive: true });
+  viewport.addEventListener("touchend",   () => { if (Math.abs(dx) > 50) (dx < 0 ? nextSlide() : prevSlide()); resume(); });
+
+  // autoplay
+  function clearTimer(){ if (timerId){ clearInterval(timerId); timerId=null; } }
+  function play(){ clearTimer(); if (!autoplay) return; timerId = setInterval(nextSlide, AUTOPLAY_MS); }
+  function pauseOnce(){
+    autoplay = false;
+    toggle.innerHTML = '<i class="fas fa-play"></i>';
+    progress.style.width = "0%";
+    clearTimer();
+  }
+  function resume(){
+    autoplay = true;
+    toggle.innerHTML = '<i class="fas fa-pause"></i>';
+    updateUI();
+    play();
+  }
+  toggle.addEventListener("click", () => (autoplay ? pauseOnce() : resume()));
+  viewport.addEventListener("mouseenter", pauseOnce);
+  viewport.addEventListener("mouseleave", resume);
+
+  // init
+  updateUI();
+  play();
+
+  // ajustes responsivos
+  window.addEventListener("resize", updateUI);
+});
+</script>
+
+</body>
+</html>

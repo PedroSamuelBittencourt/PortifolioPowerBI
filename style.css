@@ -1,0 +1,58 @@
+/* Ativa transições ao adicionar a classe .show no container (gerida pelo seu JS) */
+    #experienceModal.show { opacity: 1; }
+    #experienceModal.show > div { opacity: 1; transform: scale(1); }
+
+    /* Scrollbar (webkit) — opcional */
+    .scrollbar-thin::-webkit-scrollbar{width:8px;height:8px}
+    .scrollbar-thin::-webkit-scrollbar-thumb{background:#3a3a3a;border-radius:8px}
+    .scrollbar-thin::-webkit-scrollbar-track{background:transparent}
+
+    /* Suporte a utilitário "show:" (simulação) */
+    .show\:opacity-100.show { opacity: 1 !important; }
+    .show\:scale-100.show { transform: scale(1) !important; }
+
+   /* Custom hover shadow colors for cards */
+   .hover-neongreen-shadow:hover {
+    box-shadow: 0 8px 20px 0 rgba(0, 200, 150, 0.7),
+      0 0 15px 5px rgba(0, 200, 150, 0.6) !important;
+   }
+   .hover-petrolblue-shadow:hover {
+    box-shadow: 0 8px 20px 0 rgba(13, 110, 110, 0.7),
+      0 0 15px 5px rgba(13, 110, 110, 0.6) !important;
+   }
+   .hover-coralred-shadow:hover {
+    box-shadow: 0 8px 20px 0 rgba(230, 57, 70, 0.7),
+      0 0 15px 5px rgba(230, 57, 70, 0.6) !important;
+   }
+   /* Smooth transform and shadow transition */
+   .card-hover {
+    transition-property: transform, box-shadow;
+    transition-duration: 300ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+   }
+   /* Movement on hover */
+   .card-hover:hover {
+    transform: translateY(-8px) scale(1.03);
+   }
+
+#teste {
+    margin-right: 3% !important;
+    margin-top: 10px !important;
+    justify-content: flex-end;
+}
+.experience-btn {
+    display: inline-flex
+;
+    align-items: center;
+    background: linear-gradient(135deg, #0D6E6E, #00C896);
+    color: #EAEAEA;
+    font-weight: 600;
+    padding: 12px 32px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s 
+cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 15px 0 rgba(13, 110, 110, 0.6), 0 0 10px 3px rgba(13, 110, 110, 0.5);
+    font-size: 16px;
+}
