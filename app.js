@@ -27,6 +27,17 @@ tailwind.config = {
      },
     },
    };
+  const btn = document.getElementById("menu-btn");
+  const menu = document.getElementById("menu");
+  if (btn && menu) {
+    btn.addEventListener("click", () => {
+      menu.classList.toggle("hidden");
+      const icon = btn.querySelector("i");
+      if (!icon) return;
+      icon.classList.toggle("fa-bars");
+      icon.classList.toggle("fa-times");
+      });
+    }
 
    document.addEventListener("DOMContentLoaded", function () {
     const btn = document.getElementById("menu-btn");
@@ -44,6 +55,7 @@ tailwind.config = {
      }
     });
    });
+  
 // (opcional) Menu mobile
 document.addEventListener('DOMContentLoaded', function () {
   const menuBtn = document.getElementById('menu-btn');
@@ -137,3 +149,4 @@ document.addEventListener('DOMContentLoaded', function () {
     filterCards(filter);
   });
 });
+  
